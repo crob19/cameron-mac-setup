@@ -43,10 +43,44 @@ log "Installing Brewfile packages"
 brew bundle --file="$SCRIPT_DIR/Brewfile"
 
 # ----------------------------------------------------------------------------
+# oh-my-zsh (required by our .zshrc)
+# ----------------------------------------------------------------------------
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  log "Installing oh-my-zsh"
+  RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo "oh-my-zsh already installed"
+fi
+
+# ----------------------------------------------------------------------------
+# Touch ID for sudo
+# ----------------------------------------------------------------------------
+if [[ ! -f /etc/pam.d/sudo_local ]] || ! grep -q "pam_tid.so" /etc/pam.d/sudo_local 2>/dev/null; then
+  log "Enabling Touch ID for sudo (requires password)"
+  echo "auth       sufficient     pam_tid.so" | sudo tee -a /etc/pam.d/sudo_local >/dev/null
+fi
+
+# ----------------------------------------------------------------------------
 # npm-based coding agents (Claude Code)
 # ----------------------------------------------------------------------------
-log "Updating npm itself"
-npm install -g npm@latest
+# ----------------------------------------------------------------------------
+# Node via nvm (Homebrew node intentionally omitted to avoid PATH conflicts)
+# ----------------------------------------------------------------------------
+export NVM_DIR="$HOME/.nvm"
+mkdir -p "$NVM_DIR"
+NVM_SH="/opt/homebrew/opt/nvm/nvm.sh"
+[[ ! -s "$NVM_SH" ]] && NVM_SH="/usr/local/opt/nvm/nvm.sh"
+if [[ -s "$NVM_SH" ]]; then
+  # shellcheck source=/dev/null
+  . "$NVM_SH"
+  log "Installing latest Node LTS via nvm"
+  nvm install --lts
+  nvm alias default 'lts/*'
+  log "Updating npm"
+  npm install -g npm@latest
+else
+  warn "nvm not found — skipping Node install"
+fi
 
 # ----------------------------------------------------------------------------
 # Claude Code (native installer — recommended by Anthropic, auto-updates)
@@ -123,4 +157,19 @@ EOF
 
 setup_github_ssh
 
-log "Done."
+# ----------------------------------------------------------------------------
+# App configs, macOS defaults, dock, login items
+# ----------------------------------------------------------------------------
+log "Linking app configs"
+bash "$SCRIPT_DIR/configs/link-configs.sh"
+
+log "Applying macOS defaults"
+bash "$SCRIPT_DIR/configs/macos-defaults.sh"
+
+log "Configuring Dock"
+bash "$SCRIPT_DIR/configs/dock.sh"
+
+log "Configuring login items"
+bash "$SCRIPT_DIR/configs/login-items.sh"
+
+log "Done. See POST-INSTALL.md for remaining manual steps."
