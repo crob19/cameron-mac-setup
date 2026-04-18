@@ -16,7 +16,7 @@ Things the setup script can't automate. Work through these after running `./setu
 
 ## App-specific
 
-- [ ] **Raycast** — sign in and enable Cloud Sync (Settings → Cloud Sync) to restore extensions, hotkeys, snippets, quicklinks. As a fallback, see `docs/raycast-hotkeys.md`
+- [ ] **Raycast** — sign in and enable Cloud Sync (Settings → Cloud Sync) to restore extensions, hotkeys, snippets, quicklinks
 - [ ] **Zed** — sign in for AI features and settings sync
 - [ ] **Ghostty** — adjust theme / font if desired
 - [ ] **Brave Browser** — sign in to sync bookmarks, extensions, passwords

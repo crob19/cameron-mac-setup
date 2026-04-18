@@ -27,4 +27,3 @@ link "$REPO_DIR/configs/zed/keymap.json"   "$HOME/.config/zed/keymap.json"
 
 # Raycast: hotkeys and settings live in an encrypted SQLite DB tied to
 # Keychain, so they can't be synced via the repo. Use Raycast Cloud Sync.
-# See docs/raycast-hotkeys.md for a manual reference.
