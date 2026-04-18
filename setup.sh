@@ -123,4 +123,19 @@ EOF
 
 setup_github_ssh
 
-log "Done."
+# ----------------------------------------------------------------------------
+# App configs, macOS defaults, dock, login items
+# ----------------------------------------------------------------------------
+log "Linking app configs"
+bash "$SCRIPT_DIR/configs/link-configs.sh"
+
+log "Applying macOS defaults"
+bash "$SCRIPT_DIR/configs/macos-defaults.sh"
+
+log "Configuring Dock"
+bash "$SCRIPT_DIR/configs/dock.sh"
+
+log "Configuring login items"
+bash "$SCRIPT_DIR/configs/login-items.sh"
+
+log "Done. See POST-INSTALL.md for remaining manual steps."
