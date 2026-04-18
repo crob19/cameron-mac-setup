@@ -25,14 +25,6 @@ log "Linking Zed config"
 link "$REPO_DIR/configs/zed/settings.json" "$HOME/.config/zed/settings.json"
 link "$REPO_DIR/configs/zed/keymap.json"   "$HOME/.config/zed/keymap.json"
 
-# Raycast: plist can't be symlinked (macOS rewrites it). Copy instead.
-# Note: Raycast's cloud sync is the more reliable path — see POST-INSTALL.md.
-if [[ -f "$REPO_DIR/configs/raycast.plist" ]]; then
-  log "Copying Raycast preferences (app must be closed first)"
-  if pgrep -x Raycast >/dev/null; then
-    echo "Raycast is running — quit it and re-run this script to apply preferences."
-  else
-    cp "$REPO_DIR/configs/raycast.plist" "$HOME/Library/Preferences/com.raycast.macos.plist"
-    defaults read com.raycast.macos >/dev/null  # refresh plist cache
-  fi
-fi
+# Raycast: hotkeys and settings live in an encrypted SQLite DB tied to
+# Keychain, so they can't be synced via the repo. Use Raycast Cloud Sync.
+# See docs/raycast-hotkeys.md for a manual reference.
