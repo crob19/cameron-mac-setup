@@ -68,16 +68,18 @@ fi
 # ----------------------------------------------------------------------------
 export NVM_DIR="$HOME/.nvm"
 mkdir -p "$NVM_DIR"
-if [[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]]; then
+NVM_SH="/opt/homebrew/opt/nvm/nvm.sh"
+[[ ! -s "$NVM_SH" ]] && NVM_SH="/usr/local/opt/nvm/nvm.sh"
+if [[ -s "$NVM_SH" ]]; then
   # shellcheck source=/dev/null
-  . "/opt/homebrew/opt/nvm/nvm.sh"
+  . "$NVM_SH"
   log "Installing latest Node LTS via nvm"
   nvm install --lts
   nvm alias default 'lts/*'
   log "Updating npm"
   npm install -g npm@latest
 else
-  warn "nvm not found at /opt/homebrew/opt/nvm/nvm.sh — skipping Node install"
+  warn "nvm not found — skipping Node install"
 fi
 
 # ----------------------------------------------------------------------------
