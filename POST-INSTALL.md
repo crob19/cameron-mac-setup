@@ -35,7 +35,6 @@ Things the setup script can't automate. Work through these after running `./setu
 
 ## Dev environment
 
-- [ ] `nvm install --lts` to install a Node LTS via nvm (nvm is sourced from the linked `.zshrc`)
 - [ ] Accept Xcode license: `sudo xcodebuild -license accept`
 - [ ] Set your terminal font to **JetBrainsMono Nerd Font** (installed via Brewfile) in Ghostty / Zed
 

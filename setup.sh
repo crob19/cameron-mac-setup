@@ -63,8 +63,22 @@ fi
 # ----------------------------------------------------------------------------
 # npm-based coding agents (Claude Code)
 # ----------------------------------------------------------------------------
-log "Updating npm itself"
-npm install -g npm@latest
+# ----------------------------------------------------------------------------
+# Node via nvm (Homebrew node intentionally omitted to avoid PATH conflicts)
+# ----------------------------------------------------------------------------
+export NVM_DIR="$HOME/.nvm"
+mkdir -p "$NVM_DIR"
+if [[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]]; then
+  # shellcheck source=/dev/null
+  . "/opt/homebrew/opt/nvm/nvm.sh"
+  log "Installing latest Node LTS via nvm"
+  nvm install --lts
+  nvm alias default 'lts/*'
+  log "Updating npm"
+  npm install -g npm@latest
+else
+  warn "nvm not found at /opt/homebrew/opt/nvm/nvm.sh — skipping Node install"
+fi
 
 # ----------------------------------------------------------------------------
 # Claude Code (native installer — recommended by Anthropic, auto-updates)
