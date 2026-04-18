@@ -47,6 +47,8 @@ load-nvmrc() {
     nvm use default
   fi
 }
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 
 # Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
