@@ -34,18 +34,20 @@ fi
 # ----------------------------------------------------------------------------
 # Brewfile (formulae + casks). brew bundle is idempotent.
 # ----------------------------------------------------------------------------
+log "Updating Homebrew"
+brew update
+brew upgrade
+brew upgrade --cask --greedy || true
+
 log "Installing Brewfile packages"
 brew bundle --file="$SCRIPT_DIR/Brewfile"
 
 # ----------------------------------------------------------------------------
 # npm-based coding agents (Claude Code)
 # ----------------------------------------------------------------------------
-log "Installing npm-based CLIs"
-if ! command -v claude >/dev/null 2>&1; then
-  npm install -g @anthropic-ai/claude-code
-else
-  echo "claude already installed"
-fi
+log "Installing/updating npm-based CLIs"
+npm install -g npm@latest
+npm install -g @anthropic-ai/claude-code@latest
 
 # ----------------------------------------------------------------------------
 # GitHub SSH setup

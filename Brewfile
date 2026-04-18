@@ -2,7 +2,7 @@
 brew "gh"
 brew "lazygit"
 brew "node"
-brew "python@3.13"
+brew "python"
 brew "go"
 brew "opencode"
 
