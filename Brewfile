@@ -1,11 +1,16 @@
 # CLI tools
 brew "gh"
+brew "git-lfs"
 brew "lazygit"
 brew "node"
 brew "nvm"
+brew "bun"
 brew "python"
 brew "go"
 brew "dockutil"
+
+# Fonts
+cask "font-jetbrains-mono-nerd-font"
 # Apps
 cask "raycast"
 cask "zed"

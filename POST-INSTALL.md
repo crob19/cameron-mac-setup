@@ -35,18 +35,9 @@ Things the setup script can't automate. Work through these after running `./setu
 
 ## Dev environment
 
-- [ ] Source `nvm` in your shell: add to `~/.zshrc`:
-  ```sh
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-  ```
-- [ ] `nvm install --lts` to install a Node LTS via nvm
-- [ ] Set git identity (if not already):
-  ```sh
-  git config --global user.name "Your Name"
-  git config --global user.email "you@example.com"
-  ```
+- [ ] `nvm install --lts` to install a Node LTS via nvm (nvm is sourced from the linked `.zshrc`)
 - [ ] Accept Xcode license: `sudo xcodebuild -license accept`
+- [ ] Set your terminal font to **JetBrainsMono Nerd Font** (installed via Brewfile) in Ghostty / Zed
 
 ## Cloud storage
 

@@ -20,6 +20,11 @@ link() {
   echo "linked $dest -> $src"
 }
 
+# Dotfiles
+log "Linking dotfiles"
+link "$REPO_DIR/dotfiles/.zshrc"     "$HOME/.zshrc"
+link "$REPO_DIR/dotfiles/.gitconfig" "$HOME/.gitconfig"
+
 # Zed
 log "Linking Zed config"
 link "$REPO_DIR/configs/zed/settings.json" "$HOME/.config/zed/settings.json"

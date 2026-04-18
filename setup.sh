@@ -43,6 +43,24 @@ log "Installing Brewfile packages"
 brew bundle --file="$SCRIPT_DIR/Brewfile"
 
 # ----------------------------------------------------------------------------
+# oh-my-zsh (required by our .zshrc)
+# ----------------------------------------------------------------------------
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  log "Installing oh-my-zsh"
+  RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo "oh-my-zsh already installed"
+fi
+
+# ----------------------------------------------------------------------------
+# Touch ID for sudo
+# ----------------------------------------------------------------------------
+if [[ ! -f /etc/pam.d/sudo_local ]] || ! grep -q "pam_tid.so" /etc/pam.d/sudo_local 2>/dev/null; then
+  log "Enabling Touch ID for sudo (requires password)"
+  echo "auth       sufficient     pam_tid.so" | sudo tee -a /etc/pam.d/sudo_local >/dev/null
+fi
+
+# ----------------------------------------------------------------------------
 # npm-based coding agents (Claude Code)
 # ----------------------------------------------------------------------------
 log "Updating npm itself"
