@@ -4,8 +4,6 @@ brew "lazygit"
 brew "node"
 brew "python"
 brew "go"
-brew "opencode"
-
 # Apps
 cask "raycast"
 cask "zed"

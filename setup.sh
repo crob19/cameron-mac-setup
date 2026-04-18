@@ -45,9 +45,29 @@ brew bundle --file="$SCRIPT_DIR/Brewfile"
 # ----------------------------------------------------------------------------
 # npm-based coding agents (Claude Code)
 # ----------------------------------------------------------------------------
-log "Installing/updating npm-based CLIs"
+log "Updating npm itself"
 npm install -g npm@latest
-npm install -g @anthropic-ai/claude-code@latest
+
+# ----------------------------------------------------------------------------
+# Claude Code (native installer — recommended by Anthropic, auto-updates)
+# ----------------------------------------------------------------------------
+if ! command -v claude >/dev/null 2>&1; then
+  log "Installing Claude Code (native installer)"
+  curl -fsSL https://claude.ai/install.sh | bash
+else
+  echo "claude already installed — native installer auto-updates"
+fi
+
+# ----------------------------------------------------------------------------
+# OpenCode (official install script — kept more current than brew)
+# ----------------------------------------------------------------------------
+if ! command -v opencode >/dev/null 2>&1; then
+  log "Installing OpenCode"
+  curl -fsSL https://opencode.ai/install | bash
+else
+  log "Updating OpenCode"
+  curl -fsSL https://opencode.ai/install | bash
+fi
 
 # ----------------------------------------------------------------------------
 # GitHub SSH setup
