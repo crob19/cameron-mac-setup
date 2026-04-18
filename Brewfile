@@ -2,8 +2,10 @@
 brew "gh"
 brew "lazygit"
 brew "node"
+brew "nvm"
 brew "python"
 brew "go"
+brew "dockutil"
 # Apps
 cask "raycast"
 cask "zed"
