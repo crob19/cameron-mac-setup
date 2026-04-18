@@ -1,9 +1,11 @@
+tap "oven-sh/bun"
+
 # CLI tools
 brew "gh"
 brew "git-lfs"
 brew "lazygit"
 brew "nvm"
-brew "bun"
+brew "oven-sh/bun/bun"
 brew "python"
 brew "go"
 brew "dockutil"
